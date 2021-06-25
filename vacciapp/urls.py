@@ -11,6 +11,10 @@ urlpatterns = [
     path('selectSlot/<int:pk>',views.selectSlot,name='selectSlot'),
     path('orderSlot/<int:pk>',views.orderSlot,name='orderSlot'),
     path('adminViewPincode',views.adminViewPincode,name='adminViewPincode'),
-    path('adminCreateSlot/<str:pin>',views.adminCreateSlot,name='adminCreateSlot')
+    path('bookedSlot',views.bookedSlot,name='bookedSlot'),
+    path('adminCreateSlot/<str:pin>',views.adminCreateSlot,name='adminCreateSlot'),
+    path('adminUpdateSlot/<str:pk>/',views.adminUpdateSlot,name ='adminUpdateSlot'),
+    path('adminCompletedSlot',views.adminCompletedSlot,name='adminCompletedSlot'),
+    path('adminUpdateStatus/<str:pk>/',views.adminUpdateStatus,name='adminUpdateStatus')
 
 ]

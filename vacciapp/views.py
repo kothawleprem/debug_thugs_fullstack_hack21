@@ -88,15 +88,27 @@ def selectSlot(request,pk):
     return render(request,'vacciapp/selectSlot.html',context)
 
 def orderSlot(request,pk):
-    user = request.user
+    add = Customer.objects.filter(user=request.user)
+    usr = request.user
     slot = Slot.objects.get(pk=pk)
+    if request.method == 'POST':
+        print("OK")
+        custid = request.POST.get('custid')
+        customer = Customer.objects.get(id=custid)     
+        Booking(user=usr,customer=customer,slot=slot).save()
+        return redirect ('bookedSlot')
     context = {
         'slot' : slot,
+        'add':add,
     }
     return render(request,'vacciapp/orderSlot.html',context)
 
 def bookedSlot(request):
-    pass
+    bs = Booking.objects.filter(user=request.user)
+    context = {
+        'bs' : bs,
+    }
+    return render(request,'vacciapp/bookedSlot.html',context)
 
 def adminViewPincode(request ):
     customers = Customer.objects.all()
@@ -158,7 +170,41 @@ def adminCreateSlot(request,pin):
     }
     return render(request,'vacciapp/adminCreateSlot.html',context)
 
+def adminUpdateSlot(request,pk):
+    slot = Slot.objects.get(id=pk)
+    form = AdminCreateSlotForm(instance=slot)
+    form = AdminCreateSlotForm()
+    context = {
+        'form' : form
+    }
+    if request.method == 'POST':
+        form = AdminCreateSlotForm(request.POST,instance=slot)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    return render(request,'vacciapp/adminCreateSlot.html',context)
+
 
 def adminCompletedSlot(request):
-    pass
+    bs = Booking.objects.all()
+    context = {
+        'bs' : bs,
+    }
+    return render(request,'vacciapp/adminCompletedSlot.html',context)
+
+def adminUpdateStatus(request,pk):
+    bs = Booking.objects.get(id=pk)
+    bsn = Booking.objects.filter(id=pk)
+    if request.method == 'POST':
+        setstatus = request.POST.get('setstatus')
+        print(setstatus)
+        status = setstatus
+        bs.status = setstatus
+        bs.save()
+        return redirect ('/')
+    context = {
+        'bsn' : bsn
+    }
+    return render(request,'vacciapp/adminUpdateStatus.html',context)
+
 

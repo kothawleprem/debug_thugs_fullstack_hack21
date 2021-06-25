@@ -24,20 +24,52 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Dasboard</a>
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
         </li>
+
         {% if request.user.is_authenticated %}
+        {% if request.user.is_staff %}
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/logout">Dashboard</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/logout">Create Slot</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/logout">View Bookings</a>
+        </li>
+
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
         </li>
         {% else %}
+ 
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/logout">My Bookings</a>
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/logout">Logout</a>
+        </li>
+        {% endif %}
+        
+
+        <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/viewSlot">Slots</a>
+        </li>
+        
+        
+       {% else %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/login">Login</a>
         </li>
         {% endif %}
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/viewSlot">Slots</a>
-        </li>
+
+     
       </ul>
     </div>
   </div>

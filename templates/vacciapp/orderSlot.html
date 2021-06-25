@@ -2,12 +2,19 @@
 
 {% block body %}
 
-
-        {{slot.vtype}}
-        {{slot.date}}
-        {{slot.city}
-        {{slot.state}}
-    {{slot.pincode}}
-    {{slot.address}}
-    {{slot.addMap}}
+        {{slot.vtype}} <br>
+        {{slot.date}}<br>
+        {{slot.city}} <br>
+        {{slot.state}} <br>
+    {{slot.pincode}} <br>
+    {{slot.address}} <br>
+    {{slot.addMap}} <br>
+    {% for i in add %}
+   <form action="" method="POST" >
+{% csrf_token %}
+   <input type="radio" value ={{i.id}} name="custid" > 
+   <button type="submit" href="{% url 'bookedSlot' %}">Submit</button>
+ 
+   </form>
+     {% endfor %} 
 {% endblock body %}

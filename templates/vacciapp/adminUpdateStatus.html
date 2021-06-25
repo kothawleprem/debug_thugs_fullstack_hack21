@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% for s in bs %}Current Status: {{s.status}}{% endfor %}
+
+<form action="" method="POST">
+{% csrf_token %}
+ <input type="radio" value ='pending' name="setstatus" >Pending <br>
+<input type="radio" value ='In Process' name="setstatus" > In Process <br>
+<input type="radio" value ='Completed' name="setstatus" >Completed <br>
+ <button type="submit" href="/">Submit</button> 
+ 
+
+
+</form>
+
+
+{% endblock body %}

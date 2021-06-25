@@ -34,7 +34,6 @@ class AdminCreateSlotForm(forms.ModelForm):
         model = Slot
         fields = ['vtype','date','address','city','state','pincode','addMap']
 
-class AdminCreateSlotFormPin(forms.ModelForm):
-    class Meta:
-        model = Slot
-        fields = ['vtype','date','address','city','state','addMap']
+
+
+
