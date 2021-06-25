@@ -29,3 +29,12 @@ class CustomerProfileForm(forms.ModelForm):
         fields = ['name','phone','aadhar','age','gender','address','city','state','pincode','vtaken']
         widgets = {'name':forms.TextInput(),'phone':forms.TextInput(),'aadhar':forms.TextInput(),'age':forms.TextInput(),'gender':forms.TextInput(),'address':forms.TextInput(),'city':forms.TextInput(),'state':forms.TextInput(),'pincode':forms.TextInput(),'vtaken':forms.TextInput()}
 
+class AdminCreateSlotForm(forms.ModelForm):
+    class Meta:
+        model = Slot
+        fields = ['vtype','date','address','city','state','pincode','addMap']
+
+class AdminCreateSlotFormPin(forms.ModelForm):
+    class Meta:
+        model = Slot
+        fields = ['vtype','date','address','city','state','addMap']

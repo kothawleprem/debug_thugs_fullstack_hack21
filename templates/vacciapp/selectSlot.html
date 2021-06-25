@@ -27,7 +27,7 @@
       <td>{{slot.pincode}}</td>
        <td>{{slot.address}}</td>
       <td><a href="{{slot.addMap}}">Click Here</a></td>
-      <td>Confirm</td>
+      <td><a href="{% url 'orderSlot' slot.id %}">Confirm</a></td>
       
 
     </tr>

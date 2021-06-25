@@ -87,14 +87,77 @@ def selectSlot(request,pk):
     }
     return render(request,'vacciapp/selectSlot.html',context)
 
+def orderSlot(request,pk):
+    user = request.user
+    slot = Slot.objects.get(pk=pk)
+    context = {
+        'slot' : slot,
+    }
+    return render(request,'vacciapp/orderSlot.html',context)
+
 def bookedSlot(request):
     pass
 
-def adminViewPincode(request):
-    pass
+def adminViewPincode(request ):
+    customers = Customer.objects.all()
+    pincodes = Customer.objects.values('pincode')
+    print(pincodes)
+    pins = []
+    count = []
+    pincd = []
+    for i in pincodes:
+        pins.append(i.get('pincode'))
+    
+    done = []
+    pin_dict = dict()
+    for j in pins:
+        if j in done:
+            continue
+        else:
+            occ = pins.count(j)
+            pin_dict[f'{j}'] = occ
 
-def adminCreateSlot(request):
-    pass
+    pin_sort = sorted(pin_dict.items(),key=lambda x: x[1], reverse=True)
+
+    pincd = []
+    count = []
+    for k in pin_sort:
+        pincd.append(k[0])
+        count.append(k[1])
+    # print(pincd)
+    # print(count)
+
+    slots = Slot.objects.all()
+
+    context = {
+        'customers' : customers,
+        'pincd' : pincd,
+        'count' : count,
+        'slots' : slots
+    }
+    return render(request,'vacciapp/adminViewPincode.html',context)
+    
+
+def adminCreateSlot(request,pin):
+    form = AdminCreateSlotForm()
+    if request.method == 'POST':
+        form = AdminCreateSlotForm(request.POST)
+        if form.is_valid():
+            vtype = form.cleaned_data['vtype']
+            date = form.cleaned_data['date']
+            address = form.cleaned_data['address']
+            city = form.cleaned_data['city']
+            state = form.cleaned_data['state']
+            pincode = form.cleaned_data['pincode']
+            addMap = form.cleaned_data['addMap']
+            create_slot = Slot(vtype=vtype,date=date,address=address,city=city,state=state,pincode=pincode,addMap=addMap)
+            create_slot.save()
+    context = {
+        'form' : form,
+        
+    }
+    return render(request,'vacciapp/adminCreateSlot.html',context)
+
 
 def adminCompletedSlot(request):
     pass

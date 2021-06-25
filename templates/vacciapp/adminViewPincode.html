@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block body %}
+
+
+<div class="row">
+    <div class="col-md-5">
+        <h5>Slots</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-primary btn-sm btn-block" href="{% url 'adminCreateSlot' 0 %}">Create Slot</a>
+            <table class="table table-sm">
+                <tr>
+                
+                    <th>Vtype</th>
+                    <th>Pincode</th>
+                    <th>Date</th>
+                </tr>
+                
+                {% for slot in slots %}
+                <tr>
+                <td>{{slot.vtype}}</td>
+                <td>{{slot.pincode}}</td>
+                <td>{{slot.date}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <h5>TOP Registered Pincodes</h5>
+        <hr>
+        <div class="card card-body">
+           
+            <div class='row'>
+            <div class="col-md-6">
+            <table class="table table-sm md-6">
+                <tr>
+                    <th>Pincode</th>
+                </tr>
+                {% for p in pincd %}
+                <tr>
+                
+                <td><a class="btn btn-primary" type="submit" name="" id="" style="height:20px;width:85px" value="Create" href="{% url 'adminCreateSlot' p %}" method="POST"></a> {{p}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            </div>
+            <div class="col-md-6">
+            <table class="table table-sm md-6">
+                <tr>
+                    <th>Count</th>
+                </tr>
+                {% for c in count %}
+                <tr>
+                <td>{{c}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock body %}
