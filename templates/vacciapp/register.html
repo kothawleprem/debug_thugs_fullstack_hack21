@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+
+ <form method="POST" class="form-group">
+ {% if messages %}
+ {% for message in messages %}
+ <p>{{message}}</p>
+ {% endfor %}
+ {% endif %}
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{error}}
+        <button type="submit" class="btn btn-success">Register</button>
+    </form>
+
+{% endblock %}

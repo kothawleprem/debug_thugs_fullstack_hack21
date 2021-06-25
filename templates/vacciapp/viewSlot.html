@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>View Slot</h1>
+{% if request.user.is_authenticated %}
+{{user.username}}
+{% else %}
+<h1>please login</h1>
+{% endif %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Vtype</th>
+      <th scope="col">Date</th>
+      <th scope="col">City</th>
+      <th scope="col">State</th>
+      <th scope="col">Pincode</th>
+      <th scope="col">Select Slot</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for slot in slots %}
+    <tr>
+      <td>{{slot.vtype}}</td>
+      <td>{{slot.date}}</td>
+      <td>{{slot.city}}</td>
+      <td>{{slot.state}}</td>
+      <td>{{slot.pincode}}</td>
+      <td><a href="{% url 'selectSlot' slot.id %}">View Slot</a></td>
+
+    </tr>
+{% endfor %}
+  </tbody>
+</table>
+{% endblock body %}

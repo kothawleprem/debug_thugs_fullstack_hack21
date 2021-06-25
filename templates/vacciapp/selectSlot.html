@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>View Slot</h1>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Vtype</th>
+      <th scope="col">Date</th>
+      <th scope="col">City</th>
+      <th scope="col">State</th>
+      <th scope="col">Pincode</th>
+      <th scope="col">Address</th>
+      <th scope="col">Map</th>
+      <th scope="col">Confirm</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{slot.vtype}}</td>
+      <td>{{slot.date}}</td>
+      <td>{{slot.city}}</td>
+      <td>{{slot.state}}</td>
+      <td>{{slot.pincode}}</td>
+       <td>{{slot.address}}</td>
+      <td><a href="{{slot.addMap}}">Click Here</a></td>
+      <td>Confirm</td>
+      
+
+    </tr>
+ </tbody>
+</table>
+{% endblock body %}
