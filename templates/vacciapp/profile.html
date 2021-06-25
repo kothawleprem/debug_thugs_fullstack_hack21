@@ -1,0 +1,20 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+{% for ad in add %}
+{% if forloop.counter == 1 %}
+{{ad.name}}<br>
+{{ad.vtaken}}<br>
+{{ad.pincode}}<br>
+{% endif %}
+{% endfor %}
+<p></p>
+ <form method="POST" class="form-group">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+
+{% endblock %}

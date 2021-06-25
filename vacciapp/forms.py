@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django import forms
 from django.contrib.auth.models import User
+from django .forms import ModelForm
+from .models import *
 
 class CreateUserForm(UserCreationForm):
     # name =  forms.CharField(max_length=100)
@@ -16,8 +18,14 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username','email','password1','password2']
-        # 'name',,'phone','aadhar','age','gender','address','city','state','pincode','vtaken'
+        # 'name','phone','aadhar','age','gender','address','city','state','pincode','vtaken'
 
 class PassChangeForm(PasswordChangeForm):
     pass
+
+class CustomerProfileForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ['name','phone','aadhar','age','gender','address','city','state','pincode','vtaken']
+        widgets = {'name':forms.TextInput(),'phone':forms.TextInput(),'aadhar':forms.TextInput(),'age':forms.TextInput(),'gender':forms.TextInput(),'address':forms.TextInput(),'city':forms.TextInput(),'state':forms.TextInput(),'pincode':forms.TextInput(),'vtaken':forms.TextInput()}
 
