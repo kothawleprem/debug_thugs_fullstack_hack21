@@ -2,19 +2,20 @@
 
 {% block body %}
 
-<h1>booked Slot</h1>
+<h1>All booked Slots</h1>
 
 <table class="table">
   <thead>
     <tr>
       <th scope="col">Vtype</th>
       <th scope="col">Date</th>
+      <th scope="col">Address</th>
       <th scope="col">City</th>
       <th scope="col">State</th>
       <th scope="col">Pincode</th>
        <th scope="col">Date Booked</th>
         <th scope="col">Status</th>
-        <th scope="col">Update</th>
+        <th scope="col">Update Status</th>
 
     </tr>
   </thead>
@@ -23,6 +24,7 @@
     <tr>
       <td>{{s.slot.vtype}}</td>
       <td>{{s.slot.date}}</td>
+      <td>{{s.slot.address}}</td>
       <td>{{s.slot.city}}</td>
       <td>{{s.slot.state}}</td>
       <td>{{s.slot.pincode}}</td>

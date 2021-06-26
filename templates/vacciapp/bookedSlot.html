@@ -2,35 +2,37 @@
 
 {% block body %}
 
-<h1>booked Slot</h1>
+<h1>Booked Slot</h1>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Vtype</th>
-      <th scope="col">Date</th>
-      <th scope="col">City</th>
-      <th scope="col">State</th>
-      <th scope="col">Pincode</th>
-      <th scope="col">Date Booked</th>
-      <th scope="col">Status</th>
-      <th scope="col">Cancel Booking</th>
-    </tr>
-  </thead>
-  <tbody>
+
+<div class="container">
   {% for b in bs %}
-    <tr>
-      <td>{{b.slot.vtype}}</td>
-      <td>{{b.slot.date}}</td>
-      <td>{{b.slot.city}}</td>
-      <td>{{b.slot.state}}</td>
-      <td>{{b.slot.pincode}}</td>
-      <td>{{b.date_booked}}</td>
-      <td>{{b.status}}</td>
-      <td><a href="{% url 'deleteBooking' b.id %}">Proceed</a></td>
 
-    </tr>
+<div class="row">
+<div class="col-md-6">
+  {% if b.slot.vtype == 'Covishield' %}
+<img src="https://s.w-x.co/util/image/w/in-sii.jpg?crop=16:9&width=980&format=pjpg&auto=webp&quality=60" style="width:300px" alt="">
+{% elif b.slot.vtype == 'Covaxin' %}
+<img src="https://images.firstpost.com/wp-content/uploads/2020/12/COVAXIN-vaccine-by-Bharath-Biotech_Bharath-Biotech-2.jpg?impolicy=website&width=640&height=363" style="width:300px" alt="">
+{% else %}
+<img src="https://aniportalimages.s3.amazonaws.com/media/details/sputnik_v_june24.jpg" style="width:300px" alt="">
+{% endif %}
+</div>
+<br>
+<div class="col-md-6">
+Vaccine - {{b.slot.vtype}} <br>
+Pincode - {{b.slot.pincode}} <br>
+Date - {{b.slot.date}} <br>
+Address - {{b.slot.address}} <br>
+City - {{b.slot.city}} <br>
+State - {{b.slot.state}} <br>
+Available Slots - {{b.slot.count}} <br>
+Status - {{b.status}} <br>
+<a href="{{b.slot.addMap}}">View Map</a><br>
+</div>
+</div>
+<br><br><br>
 {% endfor %}
-  </tbody>
-</table>
+
+</div>
 {% endblock body %}

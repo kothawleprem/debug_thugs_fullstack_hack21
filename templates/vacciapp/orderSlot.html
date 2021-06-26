@@ -2,19 +2,23 @@
 
 {% block body %}
 
-        {{slot.vtype}} <br>
-        {{slot.date}}<br>
-        {{slot.city}} <br>
-        {{slot.state}} <br>
-    {{slot.pincode}} <br>
-    {{slot.address}} <br>
-    {{slot.addMap}} <br>
+<center>
+       Vaccine - {{slot.vtype}} <br>
+Pincode - {{slot.pincode}} <br>
+Date - {{slot.date}} <br>
+Address - {{slot.address}} <br>
+City - {{slot.city}} <br>
+State - {{slot.state}} <br>
+Available Slots - {{slot.count}} <br>
+<a href="{{slot.addMap}}">Click Here</a> <br>
     {% for i in add %}
    <form action="" method="POST" >
 {% csrf_token %}
-   <input type="radio" value ={{i.id}} name="custid" > 
+   <input type="radio" value ={{i.id}} name="custid" > I confirm my Booking <br>
    <button type="submit" href="{% url 'bookedSlot' %}">Submit</button>
  
    </form>
+
+</center>
      {% endfor %} 
 {% endblock body %}

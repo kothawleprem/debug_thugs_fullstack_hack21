@@ -32,7 +32,7 @@ class CustomerProfileForm(forms.ModelForm):
 class AdminCreateSlotForm(forms.ModelForm):
     class Meta:
         model = Slot
-        fields = ['vtype','date','address','city','state','pincode','addMap']
+        fields = ['vtype','date','address','city','state','pincode','addMap','count']
 
 
 

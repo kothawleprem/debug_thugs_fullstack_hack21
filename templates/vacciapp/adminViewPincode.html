@@ -4,10 +4,11 @@
 
 <div class="row">
     <div class="col-md-5">
-        <h5>Slots</h5>
+    <center><h5>All Current Slots</h5></center>
+        
         <hr>
         <div class="card card-body">
-            <a class="btn btn-primary btn-sm btn-block" href="{% url 'adminCreateSlot' 0 %}">Create Slot</a>
+            <a class="btn btn-primary btn-sm btn-block" href="{% url 'adminCreateSlot' %}">Create Slot</a>
             <table class="table table-sm">
                 <tr>
                 
@@ -32,7 +33,8 @@
     </div>
 
     <div class="col-md-7">
-        <h5>TOP Registered Pincodes</h5>
+    <center><h5>Top Registered Pincodes</h5></center>
+        
         <hr>
         <div class="card card-body">
            
@@ -45,7 +47,7 @@
                 {% for p in pincd %}
                 <tr>
                 
-                <td><a class="btn btn-primary" type="submit" name="" id="" style="height:20px;width:85px" value="Create" href="{% url 'adminCreateSlot' p %}" method="POST"></a> {{p}}</td>
+                <td>{{p}}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -66,6 +68,7 @@
         </div>
     </div>
 </div>
+
 
 
 {% endblock body %}

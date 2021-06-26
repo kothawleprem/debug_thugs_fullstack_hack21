@@ -2,42 +2,49 @@
 
 {% block body %}
 
-<h1>View Slot</h1>
-{% if request.user.is_authenticated %}
-{{user.username}}
-{% else %}
-<h1>please login</h1>
-{% endif %}
 
 
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Vtype</th>
-      <th scope="col">Date</th>
-      <th scope="col">City</th>
-      <th scope="col">State</th>
-      <th scope="col">Pincode</th>
-      <th scope="col">Available Slots</th>
-      <th scope="col">Select Slot</th>
-   
-    </tr>
-  </thead>
-  <tbody>
-  {% for slot in slots %}
-    <tr>
-      <td>{{slot.vtype}}</td>
-      <td>{{slot.date}}</td>
-      <td>{{slot.city}}</td>
-      <td>{{slot.state}}</td>
-      <td>{{slot.pincode}}</td>
-       <td>{{slot.count}}</td>
-      <td><a href="{% url 'selectSlot' slot.id %}">View Slot</a></td>
-    </tr>
-{% endfor %}
-  </tbody>
-</table>
 
+<section class="pt-5 pb-5">
+  <div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3 class="mb-3">View Slots </h3>
+        </div>
+        <div class="col-6 text-right">
+            <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
+                <i class="fa fa-arrow-left"></i>
+            </a>
+            <a class="btn btn-primary mb-3 " href="#carouselExampleIndicators2" role="button" data-slide="next">
+                <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="col-12">
+            <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel">
 
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                               {% for slot in slots %}
+                            <div class="col-md-4 mb-3">
+                         
+                                <div class="card">
+                                    <img class="img-fluid" style='height:250px' alt="100%x280" {% if slot.vtype == 'Covishield' %} src="https://s.w-x.co/util/image/w/in-sii.jpg?crop=16:9&width=980&format=pjpg&auto=webp&quality=60" {% elif slot.vtype == 'Covaxin' %} src="https://images.firstpost.com/wp-content/uploads/2020/12/COVAXIN-vaccine-by-Bharath-Biotech_Bharath-Biotech-2.jpg?impolicy=website&width=640&height=363" {% else %} src="https://aniportalimages.s3.amazonaws.com/media/details/sputnik_v_june24.jpg" {% endif %}>
+                                    <div class="card-body">
+                                        <h4 class="card-title">{{slot.vtype}} - {{slot.pincode}}</h4>
+                                        <p class="card-text">{{slot.address}} <br> Date - {{slot.date}} <br> City - {{slot.city}} <br> State - {{slot.state}} <br> Available Slots - {{slot.count}} <br> <a class="btn btn-primary" href="{% url 'selectSlot' slot.id %}">View Slot</a></p>
+                                    </div>
+  
+                                </div>
+                            </div>
+                             {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
 
 {% endblock body %}

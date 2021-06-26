@@ -14,7 +14,10 @@ def loginView(request):
         user = authenticate(request,username = username,password = password)
         if user is not None:
             login(request,user)
-            return redirect('viewSlot')
+            if request.user.is_staff:
+                return redirect('adminViewPincode')
+            else:
+                return redirect('viewSlot')
     return render(request, 'vacciapp/login.html')
 
 def logoutView(request):
@@ -59,6 +62,7 @@ def profile(request):
             customer_profile = Customer(user=usr,name=name,phone=phone,aadhar=aadhar,age=age,gender=gender,address=address,city=city,state=state,pincode=pincode,vtaken=vtaken,email=email)
             msg = "Profile Updated!!!"
             customer_profile.save()
+            return redirect('viewSlot')
     context = {
         'form' : form,
         'add' : add
@@ -163,7 +167,7 @@ def adminViewPincode(request ):
     return render(request,'vacciapp/adminViewPincode.html',context)
     
 
-def adminCreateSlot(request,pin):
+def adminCreateSlot(request):
     form = AdminCreateSlotForm()
     if request.method == 'POST':
         form = AdminCreateSlotForm(request.POST)
@@ -175,8 +179,10 @@ def adminCreateSlot(request,pin):
             state = form.cleaned_data['state']
             pincode = form.cleaned_data['pincode']
             addMap = form.cleaned_data['addMap']
-            create_slot = Slot(vtype=vtype,date=date,address=address,city=city,state=state,pincode=pincode,addMap=addMap)
+            count = form.cleaned_data['count']
+            create_slot = Slot(vtype=vtype,date=date,address=address,city=city,state=state,pincode=pincode,addMap=addMap,count=count)
             create_slot.save()
+            return redirect ('adminViewPincode')
     context = {
         'form' : form,
         
@@ -198,7 +204,10 @@ def adminUpdateSlot(request,pk):
     return render(request,'vacciapp/adminCreateSlot.html',context)
 
 def adminDeleteSlot(request,pk):
-    Booking.objects.get(slot=pk).delete()
+    try:
+        Booking.objects.get(slot=pk).delete()
+    except:
+        pass
     Slot.objects.get(id=pk).delete()
     return render(request,'vacciapp/adminDeleteSlot.html')
 
