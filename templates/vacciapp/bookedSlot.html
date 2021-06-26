@@ -2,37 +2,43 @@
 
 {% block body %}
 
-<h1>Booked Slot</h1>
+<center><h1>Booked Slot</h1></center>
 
-
-<div class="container">
   {% for b in bs %}
-
-<div class="row">
-<div class="col-md-6">
-  {% if b.slot.vtype == 'Covishield' %}
-<img src="https://s.w-x.co/util/image/w/in-sii.jpg?crop=16:9&width=980&format=pjpg&auto=webp&quality=60" style="width:300px" alt="">
-{% elif b.slot.vtype == 'Covaxin' %}
-<img src="https://images.firstpost.com/wp-content/uploads/2020/12/COVAXIN-vaccine-by-Bharath-Biotech_Bharath-Biotech-2.jpg?impolicy=website&width=640&height=363" style="width:300px" alt="">
-{% else %}
-<img src="https://aniportalimages.s3.amazonaws.com/media/details/sputnik_v_june24.jpg" style="width:300px" alt="">
-{% endif %}
+<div class="container">
+  <div class="card" style="border-radius: 10px;background-color:gainsboro;box-shadow: 5px 10px gold;">
+    <div class="row">
+      <div class="col-md-6">
+      <center>
+      <br>
+        {% if b.slot.vtype == 'Covishield' %}
+      <img src="https://s.w-x.co/util/image/w/in-sii.jpg?crop=16:9&width=980&format=pjpg&auto=webp&quality=60" style="width:450px;border-radius: 15px;" alt="">
+      {% elif b.slot.vtype == 'Covaxin' %}
+      <img src="https://images.firstpost.com/wp-content/uploads/2020/12/COVAXIN-vaccine-by-Bharath-Biotech_Bharath-Biotech-2.jpg?impolicy=website&width=640&height=363" style="width:450px;border-radius: 15px;" alt="">
+      {% else %}
+      <img src="https://aniportalimages.s3.amazonaws.com/media/details/sputnik_v_june24.jpg" style="width:450px;border-radius: 15px;" alt="">
+      {% endif %}
+      </center>
+      </div>
+      <div class="col-md-6">
+    <br><br>
+      <div class="row">
+        <div class="col-md-6">
+        <p>Vaccine Type - {{b.slot.vtype}} </p> <p> Pincode - {{b.slot.pincode}}</p>
+        <p>Date - {{b.slot.date}} </p> <p> City - {{b.slot.city}} </p> </div>
+      <div class="col-md-6">
+        <p>State - {{b.slot.state}} </p> <p>Status - {{b.slot.status}}</p>
+        <p>Address - {{b.slot.address}}</p>
+        <p><a href="{{b.slot.addMap}}">View Map</a></p>
+      </div>
+  
+    </div>
+    <a class="btn btn-primary" href="{% url 'deleteBooking' b.id %}">Remove</a>
+      </div>
+   
+  </div>
+ <br>
 </div>
 <br>
-<div class="col-md-6">
-Vaccine - {{b.slot.vtype}} <br>
-Pincode - {{b.slot.pincode}} <br>
-Date - {{b.slot.date}} <br>
-Address - {{b.slot.address}} <br>
-City - {{b.slot.city}} <br>
-State - {{b.slot.state}} <br>
-Available Slots - {{b.slot.count}} <br>
-Status - {{b.slot.status}} <br>
-<a href="{{b.slot.addMap}}">View Map</a><br>
-</div>
-</div>
-<br><br><br>
 {% endfor %}
-
-</div>
 {% endblock body %}

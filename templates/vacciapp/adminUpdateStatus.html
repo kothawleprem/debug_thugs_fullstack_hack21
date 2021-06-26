@@ -2,7 +2,7 @@
 
 {% block body %}
 
-{% for s in bs %}Current Status: {{s.status}}{% endfor %}
+{% for s in slot %}Current Status: {{s.status}}{% endfor %}
 
 <form action="" method="POST">
 {% csrf_token %}

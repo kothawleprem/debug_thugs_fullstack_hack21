@@ -2,19 +2,55 @@
 {% extends 'base.html' %}
 
 {% block body %}
-{% for ad in add %}
+{% comment %} {% for ad in add %}
 {% if forloop.counter == 1 %}
 {{ad.name}}<br>
 {{ad.vtaken}}<br>
 {{ad.pincode}}<br>
 {% endif %}
-{% endfor %}
-<p></p>
- <form method="POST" class="form-group">
+{% endfor %} {% endcomment %}
 
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Submit</button>
-    </form>
+
+<center><h1>Profile</h1></center>
+
+<div class="container px-1 py-5 mx-auto">
+    <div class="row">
+        <div class="col-md-6 text-center">
+                <form  method="POST" class="form-card">
+                {% csrf_token %}
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Name<span class="text-danger"> *</span></label>{{form.name}} </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Phone<span class="text-danger"> *</span></label> {{form.phone}}  </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Aadhar<span class="text-danger"> *</span></label> {{form.aadhar}} </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Age<span class="text-danger"> *</span></label> {{form.age}} </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Gender<span class="text-danger"> *</span></label> {{form.gender}} </div>
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Address<span class="text-danger"> *</span></label> {{form.address}} </div>
+                    </div>
+                     <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">City<span class="text-danger"> *</span></label> {{form.city}} </div>
+                        <div class="form-group col-sm-6  flex-column d-flex"> <label class="form-control-label px-3">State<span class="text-danger"> *</span></label> {{form.state}}  </div>
+                    </div>
+                    <div class="row justify-content-between text-left">
+                        
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Pincode<span class="text-danger"> *</span></label> {{form.pincode}} </div>
+                    
+                        <div class="form-group col-sm-6  flex-column d-flex"> <label class="form-control-label px-3">Vaccine Take<span class="text-danger"> *</span></label> {{form.vtaken}}  </div>
+                    </div>
+                     
+                    <div class="row justify-content-center">
+                        <div class="form-group col-sm-6"> <button type="submit" class="btn-block btn-primary">Submit</button> </div>
+                    </div>
+                </form>
+            </div>
+        <div class="col-md-6">
+        <img src="/media/profile.png" style='width:500px' alt="">
+        </div>
+    </div>
+
+</div>
 
 {% endblock %}

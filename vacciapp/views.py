@@ -3,6 +3,7 @@ from .models import *
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate,login, logout
+from .filters import SlotFilter, PincodeFilter
 
 def HomeView(request):
     return render(request,'vacciapp/home.html')
@@ -91,8 +92,34 @@ def viewSlot(request):
 def selectSlot(request,pk):
     user = request.user
     slot = Slot.objects.get(pk=pk)
+    address_dict = Slot.objects.values('address').get(pk=pk)
+    address = address_dict.get('address')
+    city_dict = Slot.objects.values('city').get(pk=pk)
+    city = city_dict.get('city')
+    state_dict = Slot.objects.values('state').get(pk=pk)
+    state = state_dict.get('state')
+    
+    al = address.split(" ")
+    cl = city.split(" ")
+    sl = state.split(" ")
+    final = ""
+    for a in al:
+        final = final + a + "+"
+    for c in cl:
+        final = final + c + "+"
+    for s in sl:
+        final = final + s + "+"
+    if "," in final:
+        st = final.replace(",","")
+        st = st + "India"
+    else:
+        st = final + "India"
+
+    link = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBonEm9k9dZ4T9k6cZHWGzCYGupxNQgwBc&q="+st
+ 
     context = {
         'slot' : slot,
+        'link' : link
     }
     return render(request,'vacciapp/selectSlot.html',context)
 
@@ -100,6 +127,31 @@ def orderSlot(request,pk):
     add = Customer.objects.filter(user=request.user)
     usr = request.user
     slot = Slot.objects.get(pk=pk)
+    address_dict = Slot.objects.values('address').get(pk=pk)
+    address = address_dict.get('address')
+    city_dict = Slot.objects.values('city').get(pk=pk)
+    city = city_dict.get('city')
+    state_dict = Slot.objects.values('state').get(pk=pk)
+    state = state_dict.get('state')
+    
+    al = address.split(" ")
+    cl = city.split(" ")
+    sl = state.split(" ")
+    final = ""
+    for a in al:
+        final = final + a + "+"
+    for c in cl:
+        final = final + c + "+"
+    for s in sl:
+        final = final + s + "+"
+    if "," in final:
+        st = final.replace(",","")
+        st = st + "India"
+    else:
+        st = final + "India"
+
+    link = "https://www.google.com/maps/embed/v1/place?key=AIzaSyBonEm9k9dZ4T9k6cZHWGzCYGupxNQgwBc&q="+st
+  
     if request.method == 'POST':
         print("OK")
         custid = request.POST.get('custid')
@@ -108,11 +160,11 @@ def orderSlot(request,pk):
         count = Slot.objects.values('count').get(pk=pk)
         if count.get('count') - 1 == 0:
             slot.status = 'In Process'
-        # print(count)
         slot.count = count.get('count') - 1
         slot.save()
         return redirect ('bookedSlot')
     context = {
+        'link':link,
         'slot' : slot,
         'add':add,
     }
@@ -131,7 +183,9 @@ def deleteBooking(request,pk):
 
 def adminViewPincode(request ):
     customers = Customer.objects.all()
-    pincodes = Customer.objects.values('pincode')
+    myPincodeFilter = PincodeFilter(request.GET,queryset=customers)
+    customers = myPincodeFilter.qs
+    pincodes = customers.values('pincode')
     print(pincodes)
     pins = []
     count = []
@@ -155,16 +209,18 @@ def adminViewPincode(request ):
     for k in pin_sort:
         pincd.append(k[0])
         count.append(k[1])
-    # print(pincd)
-    # print(count)
 
-    slots = Slot.objects.all()
+    slots = Slot.objects.all().order_by('-date_created')
+    mySlotFilter = SlotFilter(request.GET,queryset=slots)
+    slots = mySlotFilter.qs
 
     context = {
         'customers' : customers,
         'pincd' : pincd,
         'count' : count,
-        'slots' : slots
+        'slots' : slots,
+        'mySlotFilter' : mySlotFilter,
+        'myPincodeFilter' : myPincodeFilter,
     }
     return render(request,'vacciapp/adminViewPincode.html',context)
     
@@ -174,6 +230,7 @@ def adminCreateSlot(request):
     if request.method == 'POST':
         form = AdminCreateSlotForm(request.POST)
         if form.is_valid():
+            print('In')
             vtype = form.cleaned_data['vtype']
             date = form.cleaned_data['date']
             address = form.cleaned_data['address']
@@ -214,25 +271,26 @@ def adminDeleteSlot(request,pk):
     return render(request,'vacciapp/adminDeleteSlot.html')
 
 def adminCompletedSlot(request):
-    bs = Booking.objects.all()
+    
+    slots = Slot.objects.filter(status='In Process')
 
     context = {
-        'bs' : bs,
+        'slots' : slots,
     }
     return render(request,'vacciapp/adminCompletedSlot.html',context)
 
 def adminUpdateStatus(request,pk):
-    bs = Booking.objects.get(id=pk)
-    bsn = Booking.objects.filter(id=pk)
+    slot = Slot.objects.get(id=pk)
+    slotn = Slot.objects.filter(id=pk)
     if request.method == 'POST':
         setstatus = request.POST.get('setstatus')
         print(setstatus)
         status = setstatus
-        bs.status = setstatus
-        bs.save()
+        slot.status = setstatus
+        slot.save()
         return redirect ('/')
     context = {
-        'bsn' : bsn
+        'slotn' : slotn
     }
     return render(request,'vacciapp/adminUpdateStatus.html',context)
 

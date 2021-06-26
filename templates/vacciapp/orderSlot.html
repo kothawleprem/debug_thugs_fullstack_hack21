@@ -2,23 +2,68 @@
 
 {% block body %}
 
-<center>
-       Vaccine - {{slot.vtype}} <br>
-Pincode - {{slot.pincode}} <br>
-Date - {{slot.date}} <br>
-Address - {{slot.address}} <br>
-City - {{slot.city}} <br>
-State - {{slot.state}} <br>
-Available Slots - {{slot.count}} <br>
-<a href="{{slot.addMap}}">Click Here</a> <br>
-    {% for i in add %}
-   <form action="" method="POST" >
-{% csrf_token %}
-   <input type="radio" value ={{i.id}} name="custid" > I confirm my Booking <br>
-   <button type="submit" href="{% url 'bookedSlot' %}">Submit</button>
- 
-   </form>
 
+<div class="container">
+    <div class="card" style="border-radius: 10px;background-color:gainsboro;box-shadow: 5px 10px gold;">
+        <div class="row">
+            <div class="col-md-6">
+                <center>
+                    <br>
+                    {% if slot.vtype == 'Covishield' %}
+                    <img src="https://s.w-x.co/util/image/w/in-sii.jpg?crop=16:9&width=980&format=pjpg&auto=webp&quality=60"
+                        style="width:450px;border-radius: 15px;" alt="">
+                    {% elif slot.vtype == 'Covaxin' %}
+                    <img src="https://images.firstpost.com/wp-content/uploads/2020/12/COVAXIN-vaccine-by-Bharath-Biotech_Bharath-Biotech-2.jpg?impolicy=website&width=640&height=363"
+                        style="width:300px;border-radius: 15px;" alt="">
+                    {% else %}
+                    <img src="https://aniportalimages.s3.amazonaws.com/media/details/sputnik_v_june24.jpg"
+                        style="width:300px;border-radius: 15px;" alt="">
+                    {% endif %}
+                </center>
+            </div>
+            <div class="col-md-6">
+                <br><br>
+                <div class="row">
+                    <div class="col-md-6">
+                    {% for j in add %}
+                    <p>Name - {{j.name}}</p>
+                    <p>Age - {{j.age}} </p>
+                    <p>Email - {{j.email}}</p>
+                    <p>Phone - {{j.phone}}</p>
+                    {% endfor %}
+                         <p>Available Slots - {{slot.count}}</p>
+                    </div>
+                    <div class="col-md-6">
+                    <p>Vaccine Type - {{slot.vtype}} </p>
+                        
+                        <p>Date - {{slot.date}} </p>
+                       
+                        <p>Address - {{slot.address}} {{slot.city}} {{slot.pincode}} {{slot.state}}</p>
+                        <p>Status - {{slot.status}}</p>
+                        
+                    </div>
+
+                </div>
+                {% for i in add %}
+                     <form action="" method="POST" >
+                  {% csrf_token %}
+                     <input type="radio" value ={{i.id}} name="custid" > I confirm my Booking 
+                     <button class="btn btn-primary" type="submit" href="{% url 'bookedSlot' %}">Submit</button>
+ 
+                      </form>
+                       {% endfor %} 
+
+            </div>
+
+        </div>
+        <br>
+<center>
+    <iframe width="700" height="300" frameborder="0" style="border:0"
+        src="{{link}}"
+        allowfullscreen>
 </center>
-     {% endfor %} 
+</iframe>
+<br> <br>
+    </div>
+<br>
 {% endblock body %}

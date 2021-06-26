@@ -13,24 +13,22 @@
       <th scope="col">City</th>
       <th scope="col">State</th>
       <th scope="col">Pincode</th>
-      <th scope="col">Date Booked</th>
       <th scope="col">Status</th>
       <th scope="col">Update Status</th>
 
     </tr>
   </thead>
   <tbody>
-  {% for s in bs %}
+{% for slot in slots  %}
     <tr>
-      <td>{{s.slot.vtype}}</td>
-      <td>{{s.slot.date}}</td>
-      <td>{{s.slot.address}}</td>
-      <td>{{s.slot.city}}</td>
-      <td>{{s.slot.state}}</td>
-      <td>{{s.slot.pincode}}</td>
-      <td>{{s.date_booked}}</td>
-      <td>{{s.slot.status}}</td>
-      <td><a href="{% url 'adminUpdateStatus' s.id %}">Update</a></td>
+      <td>{{slot.vtype}}</td>
+      <td>{{slot.date}}</td>
+      <td>{{slot.address}}</td>
+      <td>{{slot.city}}</td>
+      <td>{{slot.state}}</td>
+      <td>{{slot.pincode}}</td>
+      <td>{{slot.status}}</td>
+       <td><a href="{% url 'adminUpdateStatus' slot.id %}">Update</a></td>
 
     </tr>
 {% endfor %}
