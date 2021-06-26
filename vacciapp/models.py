@@ -30,6 +30,7 @@ class Slot(models.Model):
     pincode = models.CharField(max_length=200,null=True)
     addMap = models.CharField(max_length=200,null=True)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
+    count = models.IntegerField(null=True)
 
     def __str__(self):
         return self.pincode

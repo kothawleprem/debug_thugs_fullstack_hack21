@@ -66,18 +66,23 @@ def profile(request):
     return render(request,'vacciapp/profile.html',context)
 
 def viewSlot(request):
+    bs = Booking.objects.filter(user=request.user)
     pincodes = Customer.objects.filter(user=request.user).values('pincode')
     l = len(pincodes)
     if l>0:
         userPincode = pincodes[l-1].get('pincode')
         slots = Slot.objects.filter(pincode=userPincode)
-        vtype = Slot.objects.values('vtype')
+        counts = Slot.objects.filter(count__gte=1).filter(pincode=userPincode)
         context = {
-            'slots' : slots,
-        }
+            'slots' : counts,
+
+            }
         return render(request,'vacciapp/viewSlot.html',context)
     else:
         return redirect ('profile')
+    
+
+            
 
 def selectSlot(request,pk):
     user = request.user
@@ -96,6 +101,10 @@ def orderSlot(request,pk):
         custid = request.POST.get('custid')
         customer = Customer.objects.get(id=custid)     
         Booking(user=usr,customer=customer,slot=slot).save()
+        count = Slot.objects.values('count').get(pk=pk)
+        # print(count)
+        slot.count = count.get('count') - 1
+        slot.save()
         return redirect ('bookedSlot')
     context = {
         'slot' : slot,
@@ -109,6 +118,10 @@ def bookedSlot(request):
         'bs' : bs,
     }
     return render(request,'vacciapp/bookedSlot.html',context)
+
+def deleteBooking(request,pk):
+    Booking.objects.get(id=pk).delete()
+    return render(request,'vacciapp/deleteBooking.html')
 
 def adminViewPincode(request ):
     customers = Customer.objects.all()
@@ -184,6 +197,10 @@ def adminUpdateSlot(request,pk):
             return redirect('/')
     return render(request,'vacciapp/adminCreateSlot.html',context)
 
+def adminDeleteSlot(request,pk):
+    Booking.objects.get(slot=pk).delete()
+    Slot.objects.get(id=pk).delete()
+    return render(request,'vacciapp/adminDeleteSlot.html')
 
 def adminCompletedSlot(request):
     bs = Booking.objects.all()

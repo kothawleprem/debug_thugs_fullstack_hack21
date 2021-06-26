@@ -15,6 +15,7 @@
                     <th>Pincode</th>
                     <th>Date</th>
                     <th>Update</th>
+                    <th>Remove</th>
                 </tr>
                 
                 {% for slot in slots %}
@@ -23,6 +24,7 @@
                 <td>{{slot.pincode}}</td>
                 <td>{{slot.date}}</td>
                 <td><a href="{% url 'adminUpdateSlot' slot.id %}">Update</a></td>
+                 <td><a href="{% url 'adminDeleteSlot' slot.id %}">Remove</a></td>
                 </tr>
                 {% endfor %}
             </table>
