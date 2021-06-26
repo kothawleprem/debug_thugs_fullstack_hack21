@@ -2,7 +2,11 @@
 
 {% block body %}
 
-<center><h1>Booked Slot</h1></center>
+{% if link == 0 %}
+<center><img src="media/empty.png" style="width:650px;" alt="">
+<h2>It seem's you dont have any slots booked. <a class="btn btn-primary" href="{% url 'viewSlot' %}"> View Slot</a> </h2></center>
+
+{% endif %}
 
   {% for b in bs %}
 <div class="container">
@@ -21,23 +25,39 @@
       </center>
       </div>
       <div class="col-md-6">
-    <br><br>
-      <div class="row">
-        <div class="col-md-6">
-        <p>Vaccine Type - {{b.slot.vtype}} </p> <p> Pincode - {{b.slot.pincode}}</p>
-        <p>Date - {{b.slot.date}} </p> <p> City - {{b.slot.city}} </p> </div>
-      <div class="col-md-6">
-        <p>State - {{b.slot.state}} </p> <p>Status - {{b.slot.status}}</p>
-        <p>Address - {{b.slot.address}}</p>
-        <p><a href="{{b.slot.addMap}}">View Map</a></p>
+      <br><br>
+        <div class="row">
+          <div class="col-md-6">
+            <p>Vaccine Type - {{b.slot.vtype}} </p> <p> Pincode - {{b.slot.pincode}}</p>
+            <p>Date - {{b.slot.date}} </p> <p> City - {{b.slot.city}} </p> 
+          </div>
+          <div class="col-md-6">
+            <p>State - {{b.slot.state}} </p> <p>Status - {{b.slot.status}}</p>
+            <p>Address - {{b.slot.address}}</p>
+          </div>
+        </div>
+
+      <a class="btn btn-primary" href="{% url 'deleteBooking' b.id %}">Remove</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+        aria-controls="offcanvasBottom">View Map</button>
+      <br><br>
+
+    <div class="offcanvas offcanvas-bottom" tabindex="-1"  id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel" style="height: 400px;">
+      <div class="offcanvas-header">
+        
+    
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-  
+      <center>
+      <iframe width="700" height="300" frameborder="0" style="border:0" src="{{link}}" allowfullscreen>
+      
+      </iframe></center>
     </div>
-    <a class="btn btn-primary" href="{% url 'deleteBooking' b.id %}">Remove</a>
-      </div>
-   
+    </div>
   </div>
  <br>
+</div>
 </div>
 <br>
 {% endfor %}

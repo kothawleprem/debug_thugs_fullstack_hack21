@@ -24,11 +24,11 @@
             <table class="table table-sm table-success table-striped">
                 <tr>
                 
-                    <th>Vtype</th>
+                    <th>Vaccine Type</th>
                     <th>Pincode</th>
                     <th>Date</th>
-                    <th>Update</th>
-                    <th>Remove</th>
+                    <th>City</th>
+                    <th>View</th>
                 </tr>
                 
                 {% for slot in slots %}
@@ -36,8 +36,8 @@
                 <td>{{slot.vtype}}</td>
                 <td>{{slot.pincode}}</td>
                 <td>{{slot.date}}</td>
-                <td><a href="{% url 'adminUpdateSlot' slot.id %}">Update</a></td>
-                 <td><a href="{% url 'adminDeleteSlot' slot.id %}">Remove</a></td>
+               <td>{{slot.city}}</td>
+                <td><a href="{% url 'selectSlot' slot.id %}">View</a></td>
                 </tr>
                 {% endfor %}
             </table>

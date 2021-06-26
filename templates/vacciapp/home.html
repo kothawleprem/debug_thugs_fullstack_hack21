@@ -1,7 +1,84 @@
 {% extends 'base.html' %}
-{% block body %}
 
-<center>
-<h1>Home Page</h1>
-</center>
+{% block body %}
+<style>
+    .mycontainer {
+        background-color:#EAF0F0;
+    }
+</style>
+<div class="mycontainer">
+<div class="container">
+<div style="padding-top: 50px;" class="row">
+    <div class="col-md-6">
+       
+        <h1>Easy Mobile Van Vaccination Slot Booking </h1>
+        <a class="btn btn-primary" href="{% url 'viewSlot' %}">View Slots</a>
+
+    </div>
+   
+    <div class="col-md-6">
+        <br>
+        <center>
+           
+        <img src="media/vacci.png" style="width: 400px;" alt="">
+        </center>
+    </div>
+</div>
+<br><br>
+<div style="background-color: #EAF0F0;" class="card">
+    <center><h1>Why VacciFast?</h1></center>
+    <p>Entire World has come to a stand still with this ongoing COVID-19 pandemic. All necessary measures are being taken by
+    the Government Of India in order to curb the widespread. And at present its every citizen's responsibility to follow
+    Government guidelines get immunized at the earliest.</p>
+    
+    <p> At present only 18% of India's population is fully immunized. In order to fasten this process here'd presnting "Mobile Vaccination Drive"</p>
+    <p>
+     <i>Mobile Vaccination Drive would help in targeting:</i>
+     <ul>
+    <li>Smaller areas based on the pin codes & rural areas</li>
+    <li>Smaller the target leading to better efficiency</li>
+<li>Door step vaccination, no hustle</li>
+    <li>Systematic approach</li> 
+    <li>Dashboard published as per pin code , at a glance overview of the particular region</li>
+
+</ul>
+</p>
+</div>
+</div>
+<center><img src="media/office.png" style="width:500px;" alt=""></center>
+
+</div>
+<br>
+<div class="container">
+<center><h3>Steps to be Followed</h3></center>
+
+<div class="card justify-content-start" style="border-radius: 25px;border-color: blue;" ><br><center>Register Yourself and Login to the Portal.</center><br></div><br>
+
+<div class="card" style="border-radius: 25px;border-color: red;"><br>
+    <center>Create your Profile.</center><br>
+</div><br>
+
+<div class="card" style="border-radius: 25px;border-color: black"><br>
+    <center>View slots available for your pincode.</center><br>
+</div><br>
+
+<div class="card" style="border-radius: 25px;border-color: yellow"><br>
+    <center>Select slot for vaccination, view the map for exact address.</center><br>
+</div><br>
+
+<div class="card" style="border-radius: 25px;border-color: rgb(0, 255, 200);"><br>
+    <center>After booking a slot, wait for slot to be confirmed. You would be updated via email.</center><br>
+</div><br>
+
+<div class="card" style="border-radius: 25px;border-color: rgb(162, 0, 255);"><br>
+    <center>On the Date of Vaccination visit the Van and can get your dose!</center><br>
+</div><br>
+
+
+
+</div>
+
+
+
+
 {% endblock body %}

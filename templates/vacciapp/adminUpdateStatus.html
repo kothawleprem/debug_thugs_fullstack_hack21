@@ -2,14 +2,28 @@
 
 {% block body %}
 
-{% for s in slot %}Current Status: {{s.status}}{% endfor %}
 
+
+<div class="container">
+
+<br><br>
+<center><h1>Update Status</h1></center>
+
+<br><br>
 <form action="" method="POST">
 {% csrf_token %}
- <input type="radio" value ='pending' name="setstatus" >Pending <br>
-<input type="radio" value ='In Process' name="setstatus" > In Process <br>
-<input type="radio" value ='Completed' name="setstatus" >Completed <br>
- <button type="submit" href="/">Submit</button> 
+<div class="card" style="border-radius: 25px;border-color: rgb(162, 0, 255);"><br>
+    <center> <h5> <input type="radio" value ='pending' name="setstatus" > &nbsp;  Pending <br> </h5></center><br>
+</div><br>
+<div class="card" style="border-radius: 25px;border-color: rgb(162, 0, 255);"><br>
+    <center><h5> <input type="radio" value ='In Process' name="setstatus" >&nbsp;  In Process <br> </h5> </center><br>
+</div><br>
+<div class="card" style="border-radius: 25px;border-color: rgb(162, 0, 255);"><br>
+    <center><h5> <input type="radio" value ='Completed' name="setstatus" >&nbsp; Completed <br> </h5> </center><br>
+</div><br>
+</div>
+<center> <button class="btn btn-primary" type="submit" href="/">Submit</button> </center>
+
  
 
 

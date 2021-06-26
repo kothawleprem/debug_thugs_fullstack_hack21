@@ -40,7 +40,15 @@
                     </div>
 
                 </div>
+                {% if request.user.is_staff %} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a class="btn btn-primary" href="{% url 'adminUpdateStatus' slot.id %}">Update Status</a>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <a class="btn btn-primary" href="{% url 'adminDeleteSlot' slot.id %}">Delete Slot</a>
+
+                {% else %}
                 <a class="btn btn-primary" href="{% url 'orderSlot' slot.id %}">Confirm</a>
+                {% endif %}
+                
             </div>
 
         </div>
