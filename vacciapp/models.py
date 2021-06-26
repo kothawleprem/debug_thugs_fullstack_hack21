@@ -20,8 +20,13 @@ class Customer(models.Model):
     def __str__(self):
         return self.name
 
-
+STATUS = (
+        ('Pending','Pending'),
+        ('In Process','In Process'),
+        ('Completed','Completed'),
+    )
 class Slot(models.Model):
+    
     vtype = models.CharField(max_length=200,null=True)
     date = models.CharField(max_length=200,null=True)
     address = models.CharField(max_length=200,null=True)
@@ -31,21 +36,38 @@ class Slot(models.Model):
     addMap = models.CharField(max_length=200,null=True)
     date_created = models.DateTimeField(auto_now_add=True,null=True)
     count = models.IntegerField(null=True)
+    status = models.CharField(max_length=200,null=True,choices=STATUS,default="Pending")
+
+    # def setStatus(self):
+    #     c = self.count
+    #     if c == 0:
+    #         status = 'In Process'
+    #     return status
+    
+    # def save(self,*args,**kwargs):
+    #     self.status = str(self.setSatus())
+    #     super().save(*args, **kwargs)
+
 
     def __str__(self):
         return self.pincode
 
 class Booking(models.Model):
-    STATUS = (
-        ('Pending','Pending'),
-        ('In Process','In Process'),
-        ('Completed','Completed'),
-    )
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL)
     slot = models.ForeignKey(Slot, null=True, on_delete=models.SET_NULL)
     date_booked = models.DateTimeField(auto_now_add=True,null=True)
-    status = models.CharField(max_length=200,null=True,choices=STATUS,default="Pending")
+    
+
+    # def setStatus(self):
+    #     c = self.count
+    #     if c == 0:
+    #         status = 'In Process'
+    #     return status
+    
+    # def save(self,*args,**kwargs):
+    #     self.status = str(self.setSatus())
+    #     super().save(*args, **kwargs)
 
     def __str__(self):
         return self.customer.name

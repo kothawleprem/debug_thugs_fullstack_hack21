@@ -106,6 +106,8 @@ def orderSlot(request,pk):
         customer = Customer.objects.get(id=custid)     
         Booking(user=usr,customer=customer,slot=slot).save()
         count = Slot.objects.values('count').get(pk=pk)
+        if count.get('count') - 1 == 0:
+            slot.status = 'In Process'
         # print(count)
         slot.count = count.get('count') - 1
         slot.save()
@@ -213,6 +215,7 @@ def adminDeleteSlot(request,pk):
 
 def adminCompletedSlot(request):
     bs = Booking.objects.all()
+
     context = {
         'bs' : bs,
     }

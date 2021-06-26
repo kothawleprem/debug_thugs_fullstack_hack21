@@ -8,8 +8,8 @@ class CustomerModel(admin.ModelAdmin):
 
 @admin.register(Slot)
 class SlotModel(admin.ModelAdmin):
-    list_display = ['id','vtype','date','address','city','state','pincode','date_created','addMap','count']
+    list_display = ['id','vtype','date','address','city','state','pincode','date_created','addMap','count','status']
 
 @admin.register(Booking)
 class BookingModel(admin.ModelAdmin):
-    list_display = ['id','user','customer','slot','date_booked','status']
+    list_display = ['id','user','customer','slot','date_booked']
