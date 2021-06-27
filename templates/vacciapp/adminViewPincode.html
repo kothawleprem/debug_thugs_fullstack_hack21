@@ -5,23 +5,23 @@
 <div class="row">
 <center>
 
- <div class="card card-body">
+ <div class="card card-body" style="font-family: 'Vollkorn', serif;">
  <h2>Filter Data</h2>
             <form method="get">
             {{myPincodeFilter.form}}
             <button class="btn btn-primary" type="submit">Search</button>
             </form>
-        </div>
+</div>
     </center>
     <div class="col-md-8">
-    <center><h5>All Current Slots</h5></center>
+    <center><h5 style="font-family: 'Vollkorn', serif;" >All Current Slots</h5></center>
         
         <hr>
         <div class="card card-body">
          
-            <a class="btn btn-primary btn-sm btn-block" href="{% url 'adminCreateSlot' %}">Create Slot</a>
+            <a class="btn btn-primary btn-sm btn-block" href="{% url 'adminCreateSlot' %}" style="font-family: 'Vollkorn', serif;">Create Slot</a>
             <br>
-            <table class="table table-sm table-success table-striped">
+            <table class="table table-sm table-success table-striped" style="font-family: 'Domine', serif;" >
                 <tr>
                 
                     <th>Vaccine Type</th>
@@ -45,14 +45,14 @@
     </div>
 
     <div class="col-md-4">
-    <center><h5>Top Registered Pincodes</h5></center>
+    <center><h5 style="font-family: 'Vollkorn', serif;" >Top Registered Pincodes</h5></center>
         
         <hr>
         <div class="card card-body">
           
             <div class='row'>
             <div class="col-md-6">
-            <table class="table table-sm md-6 table-success table-striped">
+            <table class="table table-sm md-6 table-success table-striped" style="font-family: 'Domine', serif;">
             
                 <tr>
                     <th><center>Pincode</center></th>

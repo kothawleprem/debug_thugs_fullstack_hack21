@@ -9,7 +9,7 @@
   <div class="container">
     <div class="row">
         <div class="col-6">
-            <h3 class="mb-3">View Slots </h3>
+            <h3 class="mb-3"  style="font-family: 'Vollkorn', serif;">View Slots </h3>
         </div>
         <div class="col-6 text-right">
             <a class="btn btn-primary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
@@ -28,7 +28,7 @@
                                {% for slot in slots %}
                             <div class="col-md-4 mb-3">
                          
-                                <div class="card">
+                                <div class="card" style="font-family: 'Domine', serif;">
                                     <img class="img-fluid" style='height:250px' alt="100%x280" {% if slot.vtype == 'Covishield' %} src="https://s.w-x.co/util/image/w/in-sii.jpg?crop=16:9&width=980&format=pjpg&auto=webp&quality=60" {% elif slot.vtype == 'Covaxin' %} src="https://images.firstpost.com/wp-content/uploads/2020/12/COVAXIN-vaccine-by-Bharath-Biotech_Bharath-Biotech-2.jpg?impolicy=website&width=640&height=363" {% else %} src="https://aniportalimages.s3.amazonaws.com/media/details/sputnik_v_june24.jpg" {% endif %}>
                                     <div class="card-body">
                                         <h4 class="card-title">{{slot.vtype}} - {{slot.pincode}}</h4>

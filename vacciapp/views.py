@@ -181,7 +181,7 @@ def orderSlot(request,pk):
         # print(date)
         if count.get('count') - 1 != 0:
             subject, from_email, to = 'Your Slot has been booked!!', settings.EMAIL_HOST_USER,toemail
-            text_content = f"Hello {name},Your vaccination slot has been booked for {vtype} vaccine on {date}. The confirmation is currently pending as {count.get('count') - 1} more should book slot so that it can be confirmed. You will receive confirmation email regarding the same. Kindly visit http://127.0.0.1:8000/bookedSlot for more information."
+            text_content = f"Hello {name},Your vaccination slot has been booked for {vtype} vaccine on {date}. The confirmation is currently pending as {count.get('count') - 1} more should book slot so that it can be confirmed. You will receive confirmation email regarding the same. Kindly visit https://vaccifast.herokuapp.com/bookedSlot for more information."
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
             msg.send()
         if count.get('count') - 1 == 0:
@@ -202,7 +202,7 @@ def orderSlot(request,pk):
                 name = name_dict.get('name')
                 toemail = email
                 subject, from_email, to = 'Your Slot has been Confirmed!!', settings.EMAIL_HOST_USER,toemail
-                text_content = f"Hello {name},Your vaccination slot has been Confirmed for {vtype} vaccine on {date}. Kindly visit http://127.0.0.1:8000/bookedSlot for more information."
+                text_content = f"Hello {name},Your vaccination slot has been Confirmed for {vtype} vaccine on {date}. Kindly visit https://vaccifast.herokuapp.com/bookedSlot for more information."
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
                 msg.send()
         return redirect ('bookedSlot')
