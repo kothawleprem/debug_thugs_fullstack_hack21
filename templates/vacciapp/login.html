@@ -4,17 +4,40 @@
 
 {% block body %}
 
-<form method="POST" action="">
-{% csrf_token %}
-<input type="text" name="username" placeholder="Username..." class="form-control">
-<input type="password" name="password" placeholder="Password..." class="form-control" >
-<input class="btn btn-primary " type="submit" value="Login">
 
-</form>
-{{form.errors}}
-<div class="d-flex justify-content-center links">
-Don't have an account? 
-<a href="{% url 'register' %}" class="ml-2">Sign Up</a>
+<center><h1  style="font-family: 'Vollkorn', serif;" >Login</h1></center>
+
+<div class="container px-1 py-5 mx-auto" style="font-family: 'Domine', serif;">
+    <div class="row">
+        <div class="col-md-6 text-center">
+                <form  method="POST" class="form-card">
+                {% csrf_token %}
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Username<span class="text-danger"> *</span></label><input type="text" name="username" class="form-control"> </div>
+                       
+                    </div>
+                    
+                    <div class="row justify-content-between text-left">
+                        <div class="form-group col-sm-6 flex-column d-flex"> <label class="form-control-label px-3">Password<span class="text-danger"> *</span></label><input type="password" name="password"  class="form-control" ></div>
+                      
+                    </div>
+                     
+                    <div class="row justify-content-center">
+                    <center> <div class="form-group flex-column d-flex"> <button type="submit" class="btn-block btn-primary">Submit</button> </div></center>
+                       
+                    </div>
+                </form>
+                <div class="d-flex justify-content-center links">
+                    Don't have an account? 
+                    <a href="{% url 'register' %}" class="ml-2">Sign Up</a>
+                    </div>
+            </div>
+        <div class="col-md-6">
+        <img src="/media/login.png" style='width:500px' alt="">
+        </div>
+    </div>
+
 </div>
+
 
 {% endblock %}
